@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Electron App</title>
+<!-- build:css ../styles/app.css -->
+<!-- inject:css -->
+ <link rel="stylesheet" href="../styles/bootstrap.min.scss"> 
+ <link rel="stylesheet" href="../styles/AdminLTE.min.scss"> 
+ <link rel="stylesheet" href="../styles/all-skins.min.scss"> 
+<!-- endinject -->
+<!-- endbuild -->
+</head>
+<body>
+  <!--<div id="app"></div>-->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <!--<section class="sidebar">-->
+      <!-- Sidebar user panel -->
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>D3 SVG</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="chartjs.html"><i class="fa fa-circle-o"></i>d3_1</a></li>
+            <li><a href="morris.html"><i class="fa fa-circle-o"></i>d3_2</a></li>
+            <li class="active"><a href="flot.html"><i class="fa fa-circle-o"></i> d3_3</a></li>
+            <li><a href="inline.html"><i class="fa fa-circle-o"></i>d3_4</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!--</section>-->
+    <!-- /.sidebar -->
+  </aside>
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+        <button type="button" class="btn btn-default btn-xs active" data-toggle="on">On</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+              <h3 class="box-title">D3 SVG</h3>
+            </div>
+            <div class="box-body">
+                <svg id="d3svg"></svg>
+            </div><!-- /.box-body-->
+          </div><!-- /.box -->
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </section>
+  </div>
+
+<script type="text/javascript">
+	
+	var d3 = require('d3');
+
+	var data = [56, 99, 14, 12, 46, 33, 22, 100, 87, 6, 55, 44, 27, 28, 34];
+	
+	var height = 400;
+	var barWidth = 25;
+	
+	var x = d3.scale.linear()
+		.domain([0, d3.max(data)])
+		.range([0, height]);
+		
+	// svg = d3.select("body")
+	// 	.append("svg")
+	// 	.attr("width", data.length * (barWidth +1))
+	// 	.attr("height", height);
+		
+	// svg = d3.select("#interactive");
+	svg = d3.select("#d3svg");
+		
+	svg.selectAll("rect")
+	.data(data)
+	.enter()
+	.append("rect")
+	.attr("fill", "red")
+	.attr("stroke", "block")
+	.attr("x", function(d, i){
+		return i * (barWidth + 1);
+	})
+	.attr("y", function(d){
+		return height - (x(d));
+	})
+	.attr("width", barWidth)
+	.attr("height", x);
+	
+</script>
+
+<!-- build:remove-->
+<!--<script>require('electron-connect').client.create()</script>-->
+<!-- endbuild -->
+<!--<script src="bootstrap.js"></script>-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
+</body>
+</html>
